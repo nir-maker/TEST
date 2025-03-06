@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>משחק שאלות ותשובות</title>
+  <style>
+    /* עיצוב בסיסי */
+    body { font-family: Arial, sans-serif; background-color: #f0f0f0; text-align: center; padding: 20px; }
+    .question { font-size: 1.5em; margin: 20px 0; }
+    .answers button { display: block; margin: 10px auto; padding: 10px 20px; font-size: 1em; cursor: pointer; }
+    .result { font-size: 1.2em; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>משחק שאלות ותשובות</h1>
+  <div class="question" id="question"></div>
+  <div class="answers" id="answers"></div>
+  <div class="result" id="result"></div>
+
+  <script>
+    let quizData = []; // המשתנה שיכיל את נתוני ה־JSON
+    let currentQuestion = 0;
+    const questionEl = document.getElementById('question');
+    const answersEl = document.getElementById('answers');
+    const resultEl = document.getElementById('result');
+
+    function loadQuestion() {
+      answersEl.innerHTML = "";
+      resultEl.innerHTML = "";
+      let q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+
+      q.answers.forEach(answer => {
+        let button = document.createElement('button');
+        button.textContent = answer;
+        button.addEventListener('click', function() {
+          checkAnswer(answer);
+        });
+        answersEl.appendChild(button);
+      });
+    }
+
+    function checkAnswer(selected) {
+      let q = quizData[currentQuestion];
+      if (selected === q.correct) {
+        resultEl.textContent = "נכון!";
+      } else {
+        resultEl.textContent = "טעות! התשובה הנכונה היא: " + q.correct;
+      }
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+        } else {
+          questionEl.textContent = "סיימת את המשחק!";
+          answersEl.innerHTML = "";
+        }
+      }, 1500);
+    }
+
+    // טעינת הנתונים מתוך questions.json
+    fetch('questions.json')
+      .then(response => response.json())
+      .then(data => {
+        quizData = data;
+        loadQuestion();
+      })
+      .catch(error => {
+        console.error('Error loading JSON:', error);
+        questionEl.textContent = "אירעה שגיאה בטעינת השאלות.";
+      });
+  </script>
+</body>
+</html>
