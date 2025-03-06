@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>משחק שאלות ותשובות</title>
+  <!-- כאן נטמיע את קוד ה-CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>משחק שאלות ותשובות</h1>
+  
+  <!-- כפתורי שליטה: "התחל משחק" ו"התחל מחדש" -->
+  <div class="control-buttons">
+    <button id="startBtn">התחל משחק</button>
+    <button id="restartBtn" style="display: none;">התחל מחדש</button>
+  </div>
+
+  <!-- תיבת המשחק -->
+  <div class="game-container" id="gameContainer">
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <!-- צלילים לתשובה נכונה ושגויה -->
+  <audio id="sound-correct" src="correct.mp3" preload="auto"></audio>
+  <audio id="sound-wrong" src="wrong.mp3" preload="auto"></audio>
+
+  <!-- כאן נטמיע את קוד ה-JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
