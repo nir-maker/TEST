@@ -34,7 +34,7 @@
   <div class="result" id="result"></div>
 
   <script>
-    let quizData = []; 
+    let quizData = [];
     let currentQuestion = 0;
     const questionEl = document.getElementById('question');
     const answersEl = document.getElementById('answers');
@@ -74,22 +74,22 @@
       }, 1500);
     }
 
-    // טעינת קובץ ה-JSON מהגיט האב באמצעות קישור raw
-fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json?v=' + new Date().getTime())
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('HTTP error, status = ' + response.status);
-    }
-    return response.json();
-  })
-  .then(data => {
-    quizData = data;
-    loadQuestion();
-  })
-  .catch(error => {
-    console.error('שגיאה בטעינת JSON:', error);
-    questionEl.textContent = "אירעה שגיאה בטעינת השאלות: " + error.message;
-  });
+    // טעינת קובץ ה-JSON עם פרמטר למניעת מטמון ובדיקת שגיאות מפורטת
+    fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json?v=' + new Date().getTime())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('HTTP error, status = ' + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        quizData = data;
+        loadQuestion();
+      })
+      .catch(error => {
+        console.error('שגיאה בטעינת JSON:', error);
+        questionEl.textContent = "אירעה שגיאה בטעינת השאלות: " + error.message;
+      });
   </script>
 </body>
 </html>
