@@ -46,22 +46,22 @@
       let q = quizData[currentQuestion];
       questionEl.textContent = q.question;
 
-      q.answers.forEach(answer => {
+      q.options.forEach((option, index) => {
         let button = document.createElement('button');
-        button.textContent = answer;
+        button.textContent = option;
         button.addEventListener('click', function() {
-          checkAnswer(answer);
+          checkAnswer(index);
         });
         answersEl.appendChild(button);
       });
     }
 
-    function checkAnswer(selected) {
+    function checkAnswer(selectedIndex) {
       let q = quizData[currentQuestion];
-      if (selected === q.correct) {
+      if (selectedIndex === q.correct_answer) {
         resultEl.textContent = "נכון!";
       } else {
-        resultEl.textContent = "טעות! התשובה הנכונה היא: " + q.correct;
+        resultEl.textContent = "טעות! התשובה הנכונה היא: " + q.options[q.correct_answer];
       }
       setTimeout(() => {
         currentQuestion++;
@@ -74,7 +74,7 @@
       }, 1500);
     }
 
-    // טעינת קובץ ה-JSON עם פרמטר למניעת מטמון ובדיקת שגיאות מפורטת
+    // טעינת קובץ ה-JSON עם מניעת מטמון ובדיקת שגיאות מפורטת
     fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json?v=' + new Date().getTime())
       .then(response => {
         if (!response.ok) {
@@ -83,7 +83,8 @@
         return response.json();
       })
       .then(data => {
-        quizData = data;
+        // עדכון בהתאם למבנה הקובץ: שימוש במאפיין "questions"
+        quizData = data.questions;
         loadQuestion();
       })
       .catch(error => {
