@@ -4,11 +4,27 @@
   <meta charset="UTF-8">
   <title>משחק שאלות ותשובות</title>
   <style>
-    /* עיצוב בסיסי */
-    body { font-family: Arial, sans-serif; background-color: #f0f0f0; text-align: center; padding: 20px; }
-    .question { font-size: 1.5em; margin: 20px 0; }
-    .answers button { display: block; margin: 10px auto; padding: 10px 20px; font-size: 1em; cursor: pointer; }
-    .result { font-size: 1.2em; margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .question {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+    .answers button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .result {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -18,7 +34,7 @@
   <div class="result" id="result"></div>
 
   <script>
-    let quizData = []; // המשתנה שיכיל את נתוני ה־JSON
+    let quizData = []; 
     let currentQuestion = 0;
     const questionEl = document.getElementById('question');
     const answersEl = document.getElementById('answers');
@@ -58,15 +74,15 @@
       }, 1500);
     }
 
-    // טעינת הנתונים מתוך questions.json
-    fetch('questions.json')
+    // טעינת קובץ ה-JSON מהגיט האב באמצעות קישור raw
+    fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json')
       .then(response => response.json())
       .then(data => {
         quizData = data;
         loadQuestion();
       })
       .catch(error => {
-        console.error('Error loading JSON:', error);
+        console.error('שגיאה בטעינת JSON:', error);
         questionEl.textContent = "אירעה שגיאה בטעינת השאלות.";
       });
   </script>
