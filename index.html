@@ -75,15 +75,20 @@
     }
 
     // טעינת קובץ ה-JSON מהגיט האב באמצעות קישור raw
-    fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json?v=' + new Date().getTime())
-  .then(response => response.json())
+fetch('https://raw.githubusercontent.com/nir-maker/TEST/main/questions.json?v=' + new Date().getTime())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('HTTP error, status = ' + response.status);
+    }
+    return response.json();
+  })
   .then(data => {
     quizData = data;
     loadQuestion();
   })
   .catch(error => {
     console.error('שגיאה בטעינת JSON:', error);
-    questionEl.textContent = "אירעה שגיאה בטעינת השאלות.";
+    questionEl.textContent = "אירעה שגיאה בטעינת השאלות: " + error.message;
   });
   </script>
 </body>
