@@ -1,0 +1,92 @@
+/* רקע הדרגתי לעמוד */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #ffb347, #ffcc33);
+  text-align: center;
+}
+
+/* כותרת ראשית */
+h1 {
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #444;
+}
+
+/* תיבה מרכזית למשחק */
+.game-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  display: none; /* מוסתרת עד לחיצה על "התחל משחק" */
+}
+
+/* עיצוב השאלה */
+.question {
+  font-size: 1.4em;
+  margin: 20px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+/* עיצוב כפתורי תשובות */
+.answers button {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 12px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+.answers button:hover {
+  transform: scale(1.04);
+  background-color: #f2f2f2;
+}
+
+/* עיצוב התוצאה */
+.result {
+  font-size: 1.2em;
+  margin-top: 20px;
+  min-height: 30px;
+  color: #333;
+}
+
+/* כפתורי שליטה */
+.control-buttons {
+  margin: 15px 0;
+}
+
+.control-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff9900;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.2s;
+}
+
+.control-buttons button:hover {
+  background-color: #ffac33;
+}
+
+/* התאמה למכשירים ניידים */
+@media (max-width: 600px) {
+  .answers button {
+    width: 90%;
+  }
+}
